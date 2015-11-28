@@ -4,7 +4,7 @@ Django-mailgun-mime
 
 Description
 ___________
-It is an wrapper for Django that allows to send mail via Mailgun`s API.
+It is a wrapper for Django that allows to send mail via Mailgun`s API.
 For the reference of Mailgun`s API, please visit `api for sending <https://documentation.mailgun.com/api-sending.html>`_ .
 
 For the Django`s email implementation, please visit `sending email <https://docs.djangoproject.com/en/1.8/topics/email/>`_ .

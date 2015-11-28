@@ -10,7 +10,7 @@ class MailgunMIMEError(Exception):
 
 class MailgunMIMEBackend(BaseEmailBackend):
     """
-        It is an wrapper for Django that allows to send mail via Mailgun`s API.
+        It is a wrapper for Django that allows to send mail via Mailgun`s API.
         For the reference of Mailgun`s API, please visit:
             https://documentation.mailgun.com/api-sending.html#sending.
 
