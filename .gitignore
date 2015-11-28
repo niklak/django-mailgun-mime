@@ -1,0 +1,9 @@
+*.py[co]
+*.sw[po]
+*.dat
+*~
+*.egg-info
+/dist/
+/build/
+__pycache__/
+.idea/*
