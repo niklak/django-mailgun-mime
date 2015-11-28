@@ -2,14 +2,14 @@ import os
 from setuptools import setup
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
-    README = readme.read()
+    README = readme.read().strip()
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-mailgun-mime',
-    version='0.1.0',
+    version='0.1.4',
     packages=['django_mailgun_mime'],
     install_requires=['requests'],
     include_package_data=True,
@@ -33,5 +33,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Communications :: Email',
     ],
 )

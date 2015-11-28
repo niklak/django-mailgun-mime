@@ -5,11 +5,9 @@ Django-mailgun-mime
 Description
 ___________
 It is an wrapper for Django that allows to send mail via Mailgun`s API.
-For the reference of Mailgun`s API, please visit:
-    `api for sending <https://documentation.mailgun.com/api-sending.html#sending>`_
+For the reference of Mailgun`s API, please visit `api for sending <https://documentation.mailgun.com/api-sending.html>`_ .
 
-For the Django`s email implementation, please visit:
-    `sending email <https://docs.djangoproject.com/en/1.8/topics/email/>`_
+For the Django`s email implementation, please visit `sending email <https://docs.djangoproject.com/en/1.8/topics/email/>`_ .
 
 This wrapper sends request to Mailgun`s mime API
 to efficiently use Django`s EmailMessage instance.
@@ -33,6 +31,11 @@ Python 3.x
 Django 1.7+
 requests for Python
 
+Installation
+------------
+
+pip install django-mailgun-mime
+
 Quick start
 -----------
 1. Make an account at Mailgun;
@@ -47,6 +50,7 @@ Quick start
     # optionally:
     DEFAULT_FROM_EMAIL = 'postmaster@your.domain'
     SERVER_EMAIL = 'admin@your.domain'
+
 6. Now you can send email via Mailgun API. Also you can send email through Mailgun SMTP service. In this case just use Django`s SMTP backend.
 
 Examples
@@ -57,6 +61,7 @@ Firstly, we need to import some dependencies::
     from django.conf import settings
     from django.core.mail import send_mail, EmailMultiAlternatives
     from django.core.mail import get_connection
+
 A simple email sending example::
 
     # We will use these paths ahead
@@ -70,6 +75,7 @@ A simple email sending example::
     txt = render_to_string(path_to_txt, context)
     html = render_to_string(path_to_html, context)
     send_mail(s, txt, settings.DEFAULT_FROM_EMAIL, ['to@example.com'], html_message=html)
+
 Example with Mailgun extra headers and file attachment::
 
     s = 'Testing Mailgun awesomeness!'
@@ -86,6 +92,7 @@ Example with Mailgun extra headers and file attachment::
     msg.extra_headers['o:tracking-opens'] = 'yes'
     msg.extra_headers['h:Reply-To'] = 'from@example.com'
     msg.send()
+
 Example with specifying connection::
 
     api_key = 'API_KEY_FROM_MAILGUN'
