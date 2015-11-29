@@ -34,7 +34,9 @@ requests for Python
 Installation
 ------------
 
-pip install django-mailgun-mime
+.. code-block:: bash
+
+    $ pip install django-mailgun-mime
 
 Quick start
 -----------
@@ -42,7 +44,9 @@ Quick start
 2. Set up correctly Mailgun`s records at your DNS provider. (Just follow for the Mailgun instruction);
 3. Wait until Mailgun will check and approve your settings;
 4. If you fail go back to point 2;
-5. Set up at yours project settings these variables::
+5. Set up at yours project settings these variables:
+
+.. code-block:: python
 
     EMAIL_BACKEND = 'django_mailgun_mime.backends.MailgunMIMEBackend'
     MAILGUN_API_KEY = 'your api key'
@@ -55,14 +59,18 @@ Quick start
 
 Examples
 --------
-Firstly, we need to import some dependencies::
+Firstly, we need to import some dependencies:
+
+.. code-block:: python
 
     from django.template.loader import render_to_string
     from django.conf import settings
     from django.core.mail import send_mail, EmailMultiAlternatives
     from django.core.mail import get_connection
 
-A simple email sending example::
+A simple email sending example:
+
+.. code-block:: python
 
     # We will use these paths ahead
     path_to_txt = 'path/to/template.txt'
@@ -76,7 +84,9 @@ A simple email sending example::
     html = render_to_string(path_to_html, context)
     send_mail(s, txt, settings.DEFAULT_FROM_EMAIL, ['to@example.com'], html_message=html)
 
-Example with Mailgun extra headers and file attachment::
+Example with Mailgun extra headers and file attachment:
+
+.. code-block:: python
 
     s = 'Testing Mailgun awesomeness!'
     m = 'Message content for email with tracking.'
@@ -93,7 +103,9 @@ Example with Mailgun extra headers and file attachment::
     msg.extra_headers['h:Reply-To'] = 'from@example.com'
     msg.send()
 
-Example with specifying connection::
+Example with specifying connection:
+
+.. code-block:: python
 
     api_key = 'API_KEY_FROM_MAILGUN'
     domain = 'yours.domain.name.checked.and.setted.at.mailgun'
