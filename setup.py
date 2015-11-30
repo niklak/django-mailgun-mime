@@ -14,7 +14,7 @@ setup(
     install_requires=['requests'],
     include_package_data=True,
     license='Creative Commons Attribution-ShareAlike 4.0 International',
-    description='It is a wrapper for Django that allows to send mail via Mailgun`s API.',
+    description='It is a tiny wrapper for Django that allows to send mail via Mailgun`s API.',
     long_description=README,
     url='https://github.com/niklak/django-mailgun-mime',
     author='Nikolay Gumanov',

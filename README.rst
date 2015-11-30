@@ -4,7 +4,7 @@ Django-mailgun-mime
 
 Description
 ___________
-It is a wrapper for Django that allows to send mail via Mailgun`s API.
+It is a tiny wrapper for Django that allows to send mail via Mailgun`s API.
 For the reference of Mailgun`s API, please visit `api for sending <https://documentation.mailgun.com/api-sending.html>`_ .
 
 For the Django`s email implementation, please visit `sending email <https://docs.djangoproject.com/en/1.8/topics/email/>`_ .
@@ -12,24 +12,22 @@ For the Django`s email implementation, please visit `sending email <https://docs
 This wrapper sends request to Mailgun`s mime API
 to efficiently use Django`s EmailMessage instance.
 In this case we just put mime message,
-prepared by django`s EmailMessage instance,
+prepared by Django`s EmailMessage instance,
 and attach it as a file.
 After receiving your message Mailgun`s API will do the rest of job.
 
 This wrapper also supports Mailgun`s extra headers,
 which can be very useful.
-So if the wrapper finds such header it will placed to request`s data.
-But please, notice that the wrapper
-does not validates Mailgun`s extra headers.
-Because after starting validating extra headers,
-it will stop to be simple and tiny. :-)
+After wrapper finds such header it places one to request's data.
+Please notice that wrapper does not validate Mailgun's extra headers.
+If does so it won't be simple and tiny anymore. :-)
 
 
 Requirements
 ------------
-Python 3.x
-Django 1.7+
-requests for Python
+#. Python 3.x
+#. Django 1.7+
+#. requests for Python
 
 Installation
 ------------
@@ -40,11 +38,11 @@ Installation
 
 Quick start
 -----------
-1. Make an account at Mailgun;
-2. Set up correctly Mailgun`s records at your DNS provider. (Just follow for the Mailgun instruction);
+1. Create an account at `Mailgun <https://mailgun.com/signup>`_ ;
+2. Set up correctly Mailgun`s records at your DNS provider. (Just follow the Mailgun instructions);
 3. Wait until Mailgun will check and approve your settings;
 4. If you fail go back to point 2;
-5. Set up at yours project settings these variables:
+5. Set up following variables at yours project settings:
 
 .. code-block:: python
 
@@ -68,7 +66,8 @@ Firstly, we need to import some dependencies:
     from django.core.mail import send_mail, EmailMultiAlternatives
     from django.core.mail import get_connection
 
-A simple email sending example:
+A simple email sending
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -84,7 +83,8 @@ A simple email sending example:
     html = render_to_string(path_to_html, context)
     send_mail(s, txt, settings.DEFAULT_FROM_EMAIL, ['to@example.com'], html_message=html)
 
-Example with Mailgun extra headers and file attachment:
+Mailgun extra headers and file attachment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -103,7 +103,8 @@ Example with Mailgun extra headers and file attachment:
     msg.extra_headers['h:Reply-To'] = 'from@example.com'
     msg.send()
 
-Example with specifying connection:
+Specifying connection
+^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
