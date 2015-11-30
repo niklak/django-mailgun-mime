@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-mailgun-mime',
-    version='0.1.4',
+    version='0.1.5',
     packages=['django_mailgun_mime'],
     install_requires=['requests'],
     include_package_data=True,

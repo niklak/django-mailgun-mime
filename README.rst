@@ -25,7 +25,6 @@ If does so it won't be simple and tiny anymore. :-)
 
 Requirements
 ------------
-#. Python 3.x
 #. Django 1.7+
 #. requests for Python
 
