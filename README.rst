@@ -108,7 +108,7 @@ Example with specifying connection:
 .. code-block:: python
 
     api_key = 'API_KEY_FROM_MAILGUN'
-    domain = 'yours.domain.name.checked.and.setted.at.mailgun'
+    domain = 'yours.domain.name.checked.and.set.at.mailgun'
     connection = get_connection('django_mailgun_mime.backends.MailgunMIMEBackend',
                                 api_key=api_key,
                                 domain=domain)
