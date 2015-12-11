@@ -59,8 +59,8 @@ class MailgunMIMEBackend(BaseEmailBackend):
         """A helper method that does the actual sending."""
         if not e_message.recipients():
             return False
-        recipients = [sanitize_address(addr, e_message.encoding)
-                      for addr in e_message.recipients()]
+        recipients = (sanitize_address(addr, e_message.encoding)
+                      for addr in e_message.recipients())
 
         try:
             files = {'message': e_message.message().as_bytes(linesep='\r\n')}
