@@ -70,13 +70,11 @@ class MailgunMIMEBackend(BaseEmailBackend):
 
             hdrs = e_message.extra_headers
             check = lambda x: x in self.M_HEADERS or \
-                              any(x.startswith(i) for i in self.M_PEFIXES)
+                              x.startswith(self.M_PEFIXES)
             data.update({k: v for k, v in hdrs.items() if check(k)})
 
-            response = requests.post(self._url,
-                                     auth=('api', self._api_key),
-                                     data=data,
-                                     files=files)
+            response = requests.post(self._url, auth=('api', self._api_key),
+                                     data=data, files=files)
         except:
             if not self.fail_silently:
                 raise
