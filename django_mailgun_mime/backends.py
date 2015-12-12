@@ -1,3 +1,26 @@
+"""
+It is a tiny wrapper for Django that allows to send mail via Mailgun`s API.
+For the reference of Mailgun`s API, please visit:
+    https://documentation.mailgun.com/api-sending.html#sending.
+
+For the Django`s email documentation, please visit:
+    https://docs.djangoproject.com/en/1.8/topics/email/
+
+This wrapper sends request to Mailgun`s mime API
+to efficiently use Django`s EmailMessage instance.
+In this case we just put mime message ,
+prepared by django`s EmailMessage instance,
+and attach it as a file.
+After receiving your message Mailgun`s API will do the rest of job.
+
+This wrapper also supports Mailgun`s extra headers,
+which can be very useful.
+After wrapper finds such header it places one to request's data.
+Please notice that wrapper does not validate Mailgun's extra headers.
+If does so it won't be simple and tiny anymore.
+If something goes wrong you will receive a response with error.
+"""
+
 import requests
 from django.core.mail.backends.base import BaseEmailBackend
 from django.core.mail.message import sanitize_address
@@ -9,28 +32,7 @@ class MailgunMIMEError(Exception):
 
 
 class MailgunMIMEBackend(BaseEmailBackend):
-    """
-        It is a tiny wrapper for Django that allows to send mail via Mailgun`s API.
-        For the reference of Mailgun`s API, please visit:
-            https://documentation.mailgun.com/api-sending.html#sending.
 
-        For the Django`s email documentation, please visit:
-            https://docs.djangoproject.com/en/1.8/topics/email/
-
-        This wrapper sends request to Mailgun`s mime API
-        to efficiently use Django`s EmailMessage instance.
-        In this case we just put mime message ,
-        prepared by django`s EmailMessage instance,
-        and attach it as a file.
-        After receiving your message Mailgun`s API will do the rest of job.
-
-        This wrapper also supports Mailgun`s extra headers,
-        which can be very useful.
-        After wrapper finds such header it places one to request's data.
-        Please notice that wrapper does not validate Mailgun's extra headers.
-        If does so it won't be simple and tiny anymore.
-        If something goes wrong you will receive a response with error.
-    """
     M_HEADERS = (
         'o:tag',
         'o:campaign',
@@ -96,7 +98,6 @@ class MailgunMIMEBackend(BaseEmailBackend):
             return
         num_sent = 0
         for message in email_messages:
-            sent = self._send(message)
-            if sent:
+            if self._send(message):
                 num_sent += 1
         return num_sent
