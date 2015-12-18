@@ -51,9 +51,8 @@ def test_email_connection():
     """
     api_key = 'API_KEY_FROM_MAILGUN'
     domain = 'yours.domain.name.checked.and.set.at.mailgun'
-    connection = get_connection('django_mailgun_mime.backends.MailgunMIMEBackend',
-                                api_key=api_key,
-                                domain=domain)
+    conn = get_connection('django_mailgun_mime.backends.MailgunMIMEBackend',
+                          api_key=api_key, domain=domain)
 
     s = 'Testing specific connection!'
     m = 'Well... You receive it. What now?'
@@ -63,4 +62,4 @@ def test_email_connection():
     html = render_to_string(path_to_html, context)
 
     return send_mail(s, txt, settings.DEFAULT_FROM_EMAIL, ['to@example.com'],
-                     connection=connection, html_message=html)
+                     connection=conn, html_message=html)

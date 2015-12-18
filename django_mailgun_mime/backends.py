@@ -45,12 +45,13 @@ class MailgunMIMEBackend(BaseEmailBackend):
     )
     M_PEFIXES = ('h:', 'v:')
 
-    def __init__(self, fail_silently=False, **kwargs):
+    def __init__(self, fail_silently=False, api_key=None, domain=None,
+                 **kwargs):
         super(MailgunMIMEBackend, self).__init__(fail_silently=fail_silently,
                                                  **kwargs)
 
-        self._api_key = kwargs.get('api_key') or settings.MAILGUN_API_KEY
-        domain = kwargs.get('domain') or settings.MAILGUN_DOMAIN_NAME
+        self._api_key = api_key or settings.MAILGUN_API_KEY
+        domain = domain or settings.MAILGUN_DOMAIN_NAME
 
         if not fail_silently and (not self._api_key or not domain):
             raise AttributeError('Mailgun api key and domain are required!')
@@ -59,6 +60,10 @@ class MailgunMIMEBackend(BaseEmailBackend):
 
     def _send(self, e_message):
         """A helper method that does the actual sending."""
+
+        def check_header(h):
+            return h in self.M_HEADERS or h.startswith(self.M_PEFIXES)
+
         if not e_message.recipients():
             return False
         recipients = (sanitize_address(addr, e_message.encoding)
@@ -67,11 +72,9 @@ class MailgunMIMEBackend(BaseEmailBackend):
         try:
             files = {'message': e_message.message().as_bytes(linesep='\r\n')}
             data = {'to': ','.join(recipients)}
-
             hdrs = e_message.extra_headers
-            check = lambda x: x in self.M_HEADERS or \
-                              x.startswith(self.M_PEFIXES)
-            data.update({k: v for k, v in hdrs.items() if check(k)})
+
+            data.update({k: v for k, v in hdrs.items() if check_header(k)})
 
             response = requests.post(self._url, auth=('api', self._api_key),
                                      data=data, files=files)
